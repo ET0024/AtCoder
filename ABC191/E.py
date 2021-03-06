@@ -1,14 +1,5 @@
 import heapq
 
-n, m = map(int, input().split())
-# 隣接リスト
-graph = [[] for _ in range(n + 1)]
-for _ in range(m):
-    a, b, c = map(int, input().split())
-    graph[a].append([b, c])
-
-
-# --- 手入力ここまで ---
 
 def dijkstra(graph, start):
     dist = [float("inf")] * (n + 1)
@@ -29,6 +20,14 @@ def dijkstra(graph, start):
     return dist
 
 
+# グラフ（隣接リスト）構築
+n, m = map(int, input().split())
+graph = [[] for _ in range(n + 1)]
+for _ in range(m):
+    a, b, c = map(int, input().split())
+    graph[a].append([b, c])
+
+# 探索・結果表示
 for i in range(1, n + 1):
     dist = dijkstra(graph, i)[i]
 
