@@ -6,34 +6,31 @@ t = input()
 ls = len(s)
 lt = len(t)
 
-dp = [[0] * lt for _ in range(ls)]
-for i in range(ls):
-    for j in range(lt):
+dp = [[0] * (lt + 1) for _ in range(ls + 1)]
+for i in range(0, ls):
+    for j in range(1, lt):
         if s[i] == t[j]:
-            dp[i][j] = dp[i - 1][j - 1] + 1
+            dp[i + 1][j + 1] = dp[i][j] + 1
         else:
-            dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
-
-q = deque()
-q.append((ls - 1, lt - 1))
+            dp[i + 1][j + 1] = max(dp[i + 1][j], dp[i][j + 1])
 ans = []
-while len(q) > 0:
-    i, j = q.pop()
+pos = (ls, lt)
+while pos != (0, 0):
 
-    if i == 0 and j == 0:
-        if s[i]==t[j]:
-            ans.append(s[i])
-        break
-    if i - 1 >= 0 and j - 1 >= 0 and dp[i - 1][j - 1]==dp[i][j]-1:
-        ans.append(s[i])
-        q.append((i - 1, j - 1))
+    i, j = pos[0], pos[1]
+    if i - 1 >= 0 and j - 1 >= 0 and dp[i - 1][j - 1] == dp[i][j] - 1:
+        ans.append(s[i - 1])
+        pos = (pos[0] - 1, pos[1] - 1)
     elif i - 1 >= 0 and dp[i - 1][j] == dp[i][j]:
-        q.append((i - 1, j))
+        pos = (pos[0] - 1, pos[1])
     elif j - 1 >= 0 and dp[i][j - 1] == dp[i][j]:
-        q.append((i, j - 1))
+        pos = (pos[0], pos[1] - 1)
 
-print(dp)
-print(ans[::-1])
-
-0 1 1 1 1
-0 1 1 2 2
+if s[0] == t[0]:
+    ans.append(s[0])
+print(''.join(ans[::-1]))
+# print('-------------------')
+# print(' ' + str(list(' ' + t)))
+# for i, r in enumerate(dp):
+#     print((' ' + s)[i], r)
+# print('-------------------')
