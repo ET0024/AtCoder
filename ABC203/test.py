@@ -1,0 +1,7 @@
+a = set()
+a.add(1)
+a.add(2)
+a.add(3)
+a.add(4)
+a.add(5)
+print(set(map(lambda x: x+100, a)))
