@@ -52,7 +52,7 @@ class UnionFind():
         return '\n'.join(f'{r}: {m}' for r, m in self.all_group_members().items())
 
 #
-# # --- UnionFind study ---
+# # usage
 # uf = UnionFind(10)
 #
 # # unite two groups by O(log(n))
