@@ -12,7 +12,7 @@ def judge(hand1, hand2):
         return -1
 
 
-for round in range(m):
+for rnd in range(m):
     score_sorted = [(-val, i) for i, val in enumerate(score)]
     score_sorted.sort(key=lambda x: (x[0], x[1]))
 
@@ -20,8 +20,8 @@ for round in range(m):
         _, player1 = score_sorted[i]
         _, player2 = score_sorted[i + 1]
 
-        hand1 = hands[player1][round]
-        hand2 = hands[player2][round]
+        hand1 = hands[player1][rnd]
+        hand2 = hands[player2][rnd]
         result = judge(hand1, hand2)
         if result == 0:
             score[player1] += 1
